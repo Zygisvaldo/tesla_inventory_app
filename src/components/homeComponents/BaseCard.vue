@@ -15,7 +15,7 @@
     <v-card-text>
       <v-row>
         <v-col
-          v-for="card in loadedData"
+          v-for="card in inventoryCars"
           :key="card.id"
           sm="12"
           md="6"
@@ -138,13 +138,14 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed, onBeforeMount } from "vue";
 
 import {
   autoPilotIconSrc,
   connectivitySrc,
   infoSrc,
 } from "../../assets/autoPilotIcon.js";
+import { useStore } from "vuex";
 
 export default {
   setup() {
@@ -154,51 +155,26 @@ export default {
     const length = ref(3);
     const onboarding = ref([]);
     const isHovering = ref(false);
+    const store = useStore();
 
-    const loadedData = ref([
-      {
-        model: "Model 3",
-        driveUnit: "Model 3 baghjulstræk",
-        price: "342.490 kr",
-        range: "491",
-        topSpeed: "255",
-        acceleration: "6,1",
-        location: "Hillerød",
-        color: "Midnight Silver Metallic lak",
-        wheels: '18" Aero-fælge',
-        interior: "Sort delvist Premium-interiør",
-        autopilot: true,
-        connectivity: true,
-        isHovering: false,
-        currentSlide: 0,
-        slides: [
-          "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=STUD_3QTR&size=1400&model=m3&options=$APBS,$DV2W,$IBB1,$PMNG,$PRM30,$SC04,$MDL3,$W40B,$MT322,$CPF0,$RSF1,$CW03&crop=1400,850,300,130",
-          "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=SIDE&size=1400&model=m3&options=$APBS,$BC3R,$DV4W,$IPB1,$PMNG,$PRM31,$SC04,$MDL3,$W33D,$SLR1,$MT325,$PL31,$SPT31,$CPF0,$RSF1,$CW03&crop=1400,850,300,130&",
-          "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=STUD_SEAT&size=1400&model=m3&options=$APBS,$BC3R,$DV4W,$IPB1,$PMNG,$PRM31,$SC04,$MDL3,$W33D,$SLR1,$MT325,$PL31,$SPT31,$CPF0,$RSF1,$CW03&crop=1400,850,300,130&",
-        ],
-      },
-      {
-        model: "Model Y",
-        driveUnit: "Model Y Long Range Dual Motor firehjulstræk",
-        price: "474.000 kr",
-        range: "533",
-        topSpeed: "217",
-        acceleration: "5",
-        location: "Hillerød",
-        color: "Red Multi-Coat lakering",
-        wheels: '19" Gemini-fælge',
-        interior: "Sort Premium-interiør",
-        autopilot: false,
-        connectivity: true,
-        isHovering: false,
-        currentSlide: 0,
-        slides: [
-          "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=STUD_3QTR&size=1400&model=my&options=$APPB,$APBS,$DV4W,$INPB0,$PPMR,$PRMY1,$SC04,$MDLY,$WY19B,$MTY09,$STY5S,$CPF0,$TW01&crop=1400,850,300,130&",
-          "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=SIDE&size=1400&model=my&options=$APPB,$APBS,$DV4W,$INPB0,$PPMR,$PRMY1,$SC04,$MDLY,$WY19B,$MTY09,$STY5S,$CPF0,$TW01&crop=1400,850,300,130&",
-          "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=STUD_SEAT&size=1400&model=my&options=$APPB,$APBS,$DV4W,$INPB0,$PPMR,$PRMY1,$SC04,$MDLY,$WY19B,$MTY09,$STY5S,$CPF0,$TW01&crop=1400,850,300,130&",
-        ],
-      },
-    ]);
+    const inventoryCars = computed(function () {
+      console.log(store.getters["getInventoryCars"]);
+      return store.getters["getInventoryCars"];
+    });
+
+    onBeforeMount(async () => {
+      await loadInventory();
+      console.log(inventoryCars.value);
+    });
+
+    async function loadInventory() {
+      await store.dispatch("loadInventory");
+      console.log(inventoryCars.value);
+    }
+
+    function addCar() {
+      store.dispatch("addInventoryCar");
+    }
 
     return {
       length,
@@ -207,7 +183,9 @@ export default {
       autoPilotIconSrc: autoPilotIconSrcRef,
       connectivitySrc: connectivitySrcRef,
       infoSrc: infoSrcRef,
-      loadedData,
+      addCar,
+      loadInventory,
+      inventoryCars,
     };
   },
 };
