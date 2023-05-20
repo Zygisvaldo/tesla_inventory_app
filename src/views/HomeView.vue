@@ -1,7 +1,17 @@
 <template>
-  <HomeViewHeader />
-  <SideBar />
-  <BaseCard />
+  <v-row style="height: 100px">
+    <v-col>
+      <HomeViewHeader />
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col style="max-width: 350px">
+      <SideBar />
+    </v-col>
+    <v-col>
+      <BaseCard />
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>
