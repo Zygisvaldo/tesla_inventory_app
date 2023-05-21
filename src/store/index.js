@@ -5,19 +5,30 @@ export default createStore({
   state() {
     return {
       inventoryCars: [],
+      filteredInventoryCars: [],
     };
   },
   getters: {
     getInventoryCars(state) {
       return state.inventoryCars;
     },
+    getfilteredInventoryCars(state) {
+      return state.filteredInventoryCars;
+    },
   },
   mutations: {
     setInventoryCars(state, payload) {
       state.inventoryCars = payload;
     },
+    setFilteredInventoryCars(state, payload) {
+      state.filteredInventoryCars = payload;
+    },
   },
   actions: {
+    setFilteredInventoryCars(context, payload) {
+      context.commit("setFilteredInventoryCars", payload);
+    },
+
     async addInventoryCar() {
       //const carId = new Date().toISOString();
       const carData = {
@@ -31,10 +42,11 @@ export default createStore({
         color: "Pearl White lakering",
         wheels: '20" Uberturbine-fælge',
         interior: "Sort Premium-interiør",
-        autopilot: false,
+        autopilot: "autopilot",
         connectivity: true,
         isHovering: false,
         currentSlide: 0,
+        type: "nye",
         slides: [
           "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=STUD_3QTR&size=1400&model=m3&options=$APBS,$BC3R,$DV4W,$IPB1,$PPSW,$PRM31,$SC04,$MDL3,$W33D,$SLR1,$MT325,$PL31,$SPT31,$CPF0,$RSF1,$CW03&crop=1400,850,300,130&",
           "https://static-assets.tesla.com/configurator/compositor?&bkba_opt=1&view=SIDE&size=1400&model=m3&options=$APBS,$BC3R,$DV4W,$IPB1,$PPSW,$PRM31,$SC04,$MDL3,$W33D,$SLR1,$MT325,$PL31,$SPT31,$CPF0,$RSF1,$CW03&crop=1400,850,300,130&",
@@ -80,6 +92,8 @@ export default createStore({
             isHovering: response.data[object].isHovering,
             currentSlide: response.data[object].currentSlide,
             slides: response.data[object].slides,
+            wheels: response.data[object].wheels,
+            type: response.data[object].type,
           };
           cars.push(car);
         }

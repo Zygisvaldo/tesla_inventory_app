@@ -15,7 +15,7 @@
     <v-card-text>
       <v-row>
         <v-col
-          v-for="card in inventoryCars"
+          v-for="card in activeInventory"
           :key="card.id"
           sm="12"
           md="6"
@@ -53,7 +53,7 @@
                 <v-card
                   elevation="0"
                   height="300"
-                  class="flat-card d-flex align-center justify-center ma-2"
+                  class="flat-card d-flex align-center justify-center ma-0"
                 >
                   <v-img
                     :width="300"
@@ -138,7 +138,7 @@
 </template>
 
 <script>
-import { ref, computed, onBeforeMount } from "vue";
+import { ref, computed, onBeforeMount, watch } from "vue";
 
 import {
   autoPilotIconSrc,
@@ -156,20 +156,32 @@ export default {
     const onboarding = ref([]);
     const isHovering = ref(false);
     const store = useStore();
+    const activeInventory = ref([]);
 
     const inventoryCars = computed(function () {
-      console.log(store.getters["getInventoryCars"]);
       return store.getters["getInventoryCars"];
+    });
+
+    const filteredInventoryCars = computed(function () {
+      return store.getters["getfilteredInventoryCars"];
+    });
+
+    watch(filteredInventoryCars, (newfilteredInventoryCars) => {
+      if (newfilteredInventoryCars.length > 0) {
+        activeInventory.value = newfilteredInventoryCars;
+      } else if (newfilteredInventoryCars.length < 1) {
+        activeInventory.value = [];
+      } else {
+        activeInventory.value = inventoryCars.value;
+      }
     });
 
     onBeforeMount(async () => {
       await loadInventory();
-      console.log(inventoryCars.value);
     });
 
     async function loadInventory() {
       await store.dispatch("loadInventory");
-      console.log(inventoryCars.value);
     }
 
     function addCar() {
@@ -185,7 +197,7 @@ export default {
       infoSrc: infoSrcRef,
       addCar,
       loadInventory,
-      inventoryCars,
+      activeInventory,
     };
   },
 };
