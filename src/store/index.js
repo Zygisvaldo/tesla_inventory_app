@@ -39,6 +39,7 @@ export default createStore({
         topSpeed: "261",
         acceleration: "3.3",
         location: "Greve",
+        distance: "Alle tilgængelige",
         color: "Pearl White lakering",
         wheels: '20" Uberturbine-fælge',
         interior: "Sort Premium-interiør",
@@ -94,6 +95,7 @@ export default createStore({
             slides: response.data[object].slides,
             wheels: response.data[object].wheels,
             type: response.data[object].type,
+            distance: response.data[object].distance,
           };
           cars.push(car);
         }

@@ -13,7 +13,7 @@
   </v-container>
   <v-card flat class="bg-grey-lighten-4 ma-0">
     <v-card-text>
-      <v-row>
+      <v-row v-if="activeInventory.length > 0">
         <v-col
           v-for="card in activeInventory"
           :key="card.id"
@@ -133,6 +133,20 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row v-else>
+        <v-col>
+          <v-card flat width="450" height="auto" class="ma-2 pa-4">
+            <div class="text-h6 mb-1 d-flex justify-center">
+              Kan du ikke finde den Tesla, du leder efter?
+            </div>
+            <v-card-actions class="text-h6 mb-1 d-flex justify-center">
+              <v-btn @click="reloadPage" variant="outlined"
+                >Se nye biler på lager</v-btn
+              >
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -157,6 +171,10 @@ export default {
     const isHovering = ref(false);
     const store = useStore();
     const activeInventory = ref([]);
+
+    function reloadPage() {
+      window.location.reload();
+    }
 
     const inventoryCars = computed(function () {
       return store.getters["getInventoryCars"];
@@ -198,6 +216,7 @@ export default {
       addCar,
       loadInventory,
       activeInventory,
+      reloadPage,
     };
   },
 };

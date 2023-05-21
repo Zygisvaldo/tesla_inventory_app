@@ -1,4 +1,5 @@
 <template>
+  <DialogView :openDialog="openDialog"></DialogView>
   <v-row style="height: 100px">
     <v-col>
       <HomeViewHeader />
@@ -18,4 +19,19 @@
 import SideBar from "@/components/homeComponents/SideBar.vue";
 import HomeViewHeader from "@/components/homeComponents/HomeViewHeader.vue";
 import BaseCard from "@/components/homeComponents/BaseCard.vue";
+import DialogView from "@/components/userInterface/DialogView.vue";
+import { ref, onBeforeMount, onMounted, nextTick } from "vue";
+
+const openDialog = ref(false);
+
+onBeforeMount(async function () {
+  await nextTick();
+  openDialog.value = true;
+  console.log("lol");
+});
+onMounted(() => {
+  setTimeout(() => {
+    openDialog.value = false;
+  }, 500);
+});
 </script>
