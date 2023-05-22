@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="white" flat scroll-behavior="hide" scroll-threshold="1">
+  <v-app-bar color="white" flat >
     <template v-slot:prepend>
       <router-link to="/">
         <v-img class="px-3" :src="TeslaPreviewLogo" height="30"></v-img>

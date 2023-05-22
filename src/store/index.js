@@ -6,6 +6,8 @@ export default createStore({
     return {
       inventoryCars: [],
       filteredInventoryCars: [],
+      carPictures: [],
+      orderCarDataOptions: [],
     };
   },
   getters: {
@@ -15,6 +17,12 @@ export default createStore({
     getfilteredInventoryCars(state) {
       return state.filteredInventoryCars;
     },
+    getCarPictures(state) {
+      return state.carPictures;
+    },
+    getOrderCarDataOptions(state) {
+      return state.orderCarDataOptions;
+    },
   },
   mutations: {
     setInventoryCars(state, payload) {
@@ -23,10 +31,32 @@ export default createStore({
     setFilteredInventoryCars(state, payload) {
       state.filteredInventoryCars = payload;
     },
+    setCarPictures(state, payload) {
+      state.carPictures = payload;
+    },
+    setOrderCarDataOptions(state, payload) {
+      state.orderCarDataOptions = payload;
+    },
   },
   actions: {
     setFilteredInventoryCars(context, payload) {
       context.commit("setFilteredInventoryCars", payload);
+    },
+    async loadCarOrderOptions(context, carId) {
+      try {
+        const response = await axios(
+          `https://tesla-inventory-cbd1e-default-rtdb.firebaseio.com/carOrderOptions/${carId}.json`
+        );
+        console.log(response.data);
+        if (response.status !== 200) {
+          console.log(response);
+        } else {
+          context.commit("setCarPictures", response.data.pictures);
+          context.commit('setOrderCarDataOptions', response.data.options)
+        }
+      } catch (error) {
+        alert(error);
+      }
     },
 
     async addInventoryCar() {

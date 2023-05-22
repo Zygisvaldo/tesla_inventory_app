@@ -13,21 +13,27 @@
     <v-row>
       <v-col class="text-center">
         <p>
-          <span class="text-h5 font-weight-medium">455</span>
+          <span class="text-h5 font-weight-medium">{{
+            selectedCarOptions.range
+          }}</span>
           <span class="text-body-1 text-grey-darken-1"> km</span>
         </p>
         <p class="text-body-2 text-grey-darken-1">Rækkevidde (WLTP)</p>
       </v-col>
       <v-col class="text-center">
         <p>
-          <span class="text-h5 font-weight-medium">255</span>
+          <span class="text-h5 font-weight-medium">{{
+            selectedCarOptions.topSpeed
+          }}</span>
           <span class="text-body-1 text-grey-darken-1"> km/t</span>
         </p>
         <p class="text-body-2 text-grey-darken-1">Tophastighed</p>
       </v-col>
       <v-col class="text-center">
         <p>
-          <span class="text-h5 font-weight-medium">6,9</span>
+          <span class="text-h5 font-weight-medium">{{
+            selectedCarOptions.acceleration
+          }}</span>
           <span class="text-body-2 text-grey-darken-1"> s</span>
         </p>
         <p class="text-body-2 text-grey-darken-1">0-100 km/t</p>
@@ -46,7 +52,9 @@
               <span>Model {{ carModel }}</span>
             </v-col>
             <v-col class="d-flex align-center justify-end text-grey-darken-1">
-              <span>382.490 kr</span>
+              <span>{{
+            selectedCarOptions.price
+          }} kr</span>
             </v-col>
           </v-row>
         </v-btn>
@@ -224,7 +232,6 @@
           <v-window v-model="wheelsSlide">
             <v-window-item v-for="n in 2" :key="`card-${n}`">
               <v-card
-                color="grey-lighten-4"
                 flat
                 height="100"
                 class="d-flex align-center justify-center"
@@ -237,11 +244,7 @@
                   iskolde forhold
                 </div>
                 <div v-else>
-                  <v-card
-                    flat
-                    class="d-flex align-center justify-center"
-                    color="grey-lighten-4"
-                  >
+                  <v-card flat class="d-flex align-center justify-center">
                     <v-img
                       style="max-width: 25%"
                       src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Sottozero-Selector@3x.png?"
@@ -332,7 +335,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-list lines class="bg-grey-lighten-4">
+        <v-list lines>
           <v-list-item>
             <v-list-item-subtitle>
               Anden række med justerbare ryglæn
@@ -355,9 +358,28 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps, ref, computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+
 const wheelsSlide = ref(0);
 const props = defineProps({
   carModel: { type: String, required: true },
 });
+const carOptions = computed(() => {
+  return store.getters["getOrderCarDataOptions"];
+});
+
+const selectedCarOptions = computed(() => {
+  if (carOptions.value.length > 0) {
+    return carOptions.value[0].data;
+  } else return carOptions;
+});
 </script>
+<style scoped>
+.sidebar-side {
+  max-width: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+</style>
