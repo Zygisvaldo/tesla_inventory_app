@@ -135,7 +135,7 @@
       </v-row>
       <v-row v-else>
         <v-col>
-          <v-card flat width="450" height="auto" class="ma-2 pa-4">
+          <v-card flat width="auto" height="auto" class="ma-2 pa-4">
             <div class="text-h6 mb-1 d-flex justify-center">
               Kan du ikke finde den Tesla, du leder efter?
             </div>

@@ -27,7 +27,6 @@ const openDialog = ref(false);
 onBeforeMount(async function () {
   await nextTick();
   openDialog.value = true;
-  console.log("lol");
 });
 onMounted(() => {
   setTimeout(() => {
