@@ -1,7 +1,12 @@
 <template>
   <v-col>
     <v-window class="main-side" v-model="onboarding" show-arrows="hover">
-      <v-window-item class="main-side" v-for="n in length" :key="`card-${n}`">
+      <v-window-item
+        class="main-side"
+        v-for="n in length"
+        :key="`card-${n}`"
+        transition="fade-transition"
+      >
         <v-card flat class="main-side d-flex align-center justify-center">
           <v-img cover :src="pictureSlides[n - 1]"></v-img>
         </v-card>
@@ -35,7 +40,7 @@ const handleSidebarScroll = () => {
   } else {
     onboarding.value = 2;
   }
-  console.log(scrollPosition);
+  //console.log(scrollPosition);
 };
 
 onMounted(() => {

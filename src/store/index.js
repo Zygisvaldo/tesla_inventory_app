@@ -42,17 +42,38 @@ export default createStore({
     setFilteredInventoryCars(context, payload) {
       context.commit("setFilteredInventoryCars", payload);
     },
+
+    async loadCarColorPictures(context, payload) {
+      try {
+        const path = payload.path;
+        const color = payload.color;
+        const carId = payload.carId.toLowerCase();
+        const response = await axios(
+          `https://tesla-inventory-cbd1e-default-rtdb.firebaseio.com/${path}/${carId}/${color}.json`
+        );
+        //console.log(response.data);
+        if (response.status !== 200) {
+          console.log(response);
+        } else {
+          console.log();
+          context.commit("setCarPictures", response.data);
+        }
+      } catch (error) {
+        alert(error);
+      }
+    },
+
     async loadCarOrderOptions(context, carId) {
       try {
         const response = await axios(
           `https://tesla-inventory-cbd1e-default-rtdb.firebaseio.com/carOrderOptions/${carId}.json`
         );
-        console.log(response.data);
+
         if (response.status !== 200) {
           console.log(response);
         } else {
           context.commit("setCarPictures", response.data.pictures);
-          context.commit('setOrderCarDataOptions', response.data.options)
+          context.commit("setOrderCarDataOptions", response.data.options);
         }
       } catch (error) {
         alert(error);

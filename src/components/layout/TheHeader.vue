@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="white" flat >
+  <v-app-bar color="white" flat>
     <template v-slot:prepend>
       <router-link to="/">
         <v-img class="px-3" :src="TeslaPreviewLogo" height="30"></v-img>
@@ -64,47 +64,35 @@
 
     <v-list density="compact" nav>
       <router-link to="/" class="no-link-decoration">
-        <v-list-item
-          title="Biler på lager"
-          value="home"
-          class="no-link-color"
-        ></v-list-item>
+        <v-list-item value="home" class="no-link-color text-button"
+          >Biler på lager</v-list-item
+        >
       </router-link>
 
       <router-link :to="'/orderCar/' + 'S'" class="no-link-decoration">
-        <v-list-item
-          title="Model S"
-          value="Model S"
-          class="no-link-color"
-        ></v-list-item>
+        <v-list-item value="Model S" class="no-link-color text-button"
+          >Model S</v-list-item
+        >
       </router-link>
       <router-link to="/orderCar/3" class="no-link-decoration">
-        <v-list-item
-          title="Model 3"
-          value="Model 3"
-          class="no-link-color"
-        ></v-list-item>
+        <v-list-item value="Model 3" class="no-link-color text-button"
+          >Model 3</v-list-item
+        >
       </router-link>
       <router-link to="/orderCar/Y" class="no-link-decoration">
-        <v-list-item
-          title="Model Y"
-          value="Model Y"
-          class="no-link-color"
-        ></v-list-item>
+        <v-list-item value="Model Y" class="no-link-color text-button"
+          >Model Y</v-list-item
+        >
       </router-link>
       <router-link to="/orderCar/X" class="no-link-decoration">
-        <v-list-item
-          title="Model X"
-          value="Model X"
-          class="no-link-color"
-        ></v-list-item>
+        <v-list-item value="Model X" class="no-link-color text-button"
+          >Model X</v-list-item
+        >
       </router-link>
       <router-link to="/about" class="no-link-decoration">
-        <v-list-item
-          title="About"
-          value="about"
-          class="no-link-color"
-        ></v-list-item>
+        <v-list-item value="about" class="no-link-color text-button"
+          >About</v-list-item
+        >
       </router-link>
     </v-list>
   </v-navigation-drawer>

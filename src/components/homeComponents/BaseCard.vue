@@ -79,6 +79,7 @@
                     Rækkevidde (WLTP)
                   </p>
                 </v-col>
+                <v-divider vertical></v-divider>
                 <v-col class="text-center">
                   <p>
                     <span class="text-h5 font-weight-medium">{{
@@ -88,6 +89,7 @@
                   </p>
                   <p class="text-body-1 text-grey-darken-1">Tophastighed</p>
                 </v-col>
+                <v-divider vertical></v-divider>
                 <v-col class="text-center">
                   <p>
                     <span class="text-h5 font-weight-medium">{{

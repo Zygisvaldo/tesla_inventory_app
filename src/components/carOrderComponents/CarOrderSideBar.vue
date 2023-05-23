@@ -20,6 +20,7 @@
         </p>
         <p class="text-body-2 text-grey-darken-1">Rækkevidde (WLTP)</p>
       </v-col>
+
       <v-col class="text-center">
         <p>
           <span class="text-h5 font-weight-medium">{{
@@ -41,67 +42,52 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-row class="mt-1 pt-1 mb-0 pb-0">
-          <v-col>
-            <span class="text-body-2 text-black">Baghjulstræk</span>
-          </v-col>
-        </v-row>
-        <v-btn variant="outlined" class="w-100">
-          <v-row class="fill-height">
-            <v-col class="d-flex align-center text-grey-darken-1">
-              <span>Model {{ carModel }}</span>
-            </v-col>
-            <v-col class="d-flex align-center justify-end text-grey-darken-1">
-              <span>{{
-            selectedCarOptions.price
-          }} kr</span>
-            </v-col>
-          </v-row>
-        </v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
         <v-row>
           <v-col class="mt-1 pt-1 mb-0 pb-0">
             <span class="text-body-2 text-black">Dual Motor firehjulstræk</span>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col>
-            <v-btn variant="outlined" class="w-100 mb-2">
-              <v-row>
-                <v-col class="text-start text-grey-darken-1"
-                  >Model {{ carModel }} Long Range</v-col
-                >
-                <v-col class="text-end text-grey-darken-1">440.990 kr </v-col>
-              </v-row>
-            </v-btn>
-            <v-btn variant="outlined" class="w-100">
-              <v-row class="my2 py-2">
-                <v-col class="text-start ml-0 pl-0 text-grey-darken-1"
-                  >Model {{ carModel }} Performance</v-col
-                >
-                <v-col class="text-end mr-0 pr-0 text-grey-darken-1"
-                  >456.496 kr</v-col
-                >
-              </v-row>
-            </v-btn>
-          </v-col>
-        </v-row>
 
         <v-row>
-          <v-col class="d-flex justify-center">
+          <v-col>
             <v-btn
-              variant="tonal"
-              class="text-body-2 mt-10"
-              color="grey"
-              width="150"
+              @click="selectedTrimOption = 0"
+              variant="outlined"
+              class="w-100 mb-2 d-flex justify-space-between"
             >
-              <span class="text-black">Funktioner</span>
+              <v-row>
+                <v-col class="text-grey-darken-1"
+                  >Model {{ carModel }} Long Range
+                  {{ longRangePrice }} kr</v-col
+                >
+              </v-row>
+            </v-btn>
+            <v-btn
+              @click="selectedTrimOption = 1"
+              variant="outlined"
+              class="w-100 d-flex justify-space-between"
+            >
+              <v-row class="my2 py-2">
+                <v-col class="text-grey-darken-1"
+                  >Model {{ carModel }} Performance
+                  {{ performancePrice }} kr</v-col
+                >
+              </v-row>
             </v-btn>
           </v-col>
         </v-row>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col class="d-flex justify-center">
+        <v-btn
+          variant="tonal"
+          class="text-body-2 mt-10"
+          color="grey"
+          width="150"
+        >
+          <span class="text-black">Funktioner</span>
+        </v-btn>
       </v-col>
     </v-row>
     <v-row class="d-flex justify-center my-10 py-10">
@@ -109,23 +95,25 @@
       <v-col class="d-flex justify-sm-space-between px-4 pt-2 pb-6">
         <v-btn
           @click="
+            carColor = 'white';
             colorExtFilter =
               colorExtFilter === 'Pearl White lakering'
                 ? ''
-                : 'Pearl White lakering'
+                : 'Pearl White lakering';
           "
           icon
           variant="outlined"
         >
           <v-img
-            src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Interior_White.png?"
+            src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_White.png?"
           ></v-img>
         </v-btn>
 
         <v-btn
           @click="
+            carColor = 'black';
             colorExtFilter =
-              colorExtFilter === 'Solid Black lak' ? '' : 'Solid Black lak'
+              colorExtFilter === 'Solid Black lak' ? '' : 'Solid Black lak';
           "
           icon
           variant="outlined"
@@ -137,10 +125,11 @@
 
         <v-btn
           @click="
+            carColor = 'blue';
             colorExtFilter =
               colorExtFilter === 'Deep Blue Metallic lak'
                 ? ''
-                : 'Deep Blue Metallic lak'
+                : 'Deep Blue Metallic lak';
           "
           icon
           variant="outlined"
@@ -152,10 +141,11 @@
 
         <v-btn
           @click="
+            carColor = 'red';
             colorExtFilter =
               colorExtFilter === 'Red Multi-Coat lakering'
                 ? ''
-                : 'Red Multi-Coat lakering'
+                : 'Red Multi-Coat lakering';
           "
           icon
           variant="outlined"
@@ -167,10 +157,11 @@
 
         <v-btn
           @click="
+            carColor = 'gray';
             colorExtFilter =
               colorExtFilter === 'Midnight Silver Metallic lak'
                 ? ''
-                : 'Midnight Silver Metallic lak'
+                : 'Midnight Silver Metallic lak';
           "
           icon
           variant="outlined"
@@ -181,8 +172,16 @@
         </v-btn>
       </v-col>
       <p>
-        <span class="text-body-1 text-black">Color name goes here</span>
-        <span class="text-body-1 text-grey-darken-1"> Price</span>
+        <span class="text-body-1 text-black">{{
+          carColor[0].toUpperCase() + carColor.slice(1)
+        }}</span>
+        <span
+          v-if="carColor === 'white'"
+          class="text-body-1 text-grey-darken-1"
+        >
+          Inkluderet</span
+        >
+        <span v-else class="text-body-1 text-grey-darken-1"> 2.500 kr</span>
       </p>
     </v-row>
     <v-row class="d-flex justify-center mt-10 pt-10">
@@ -192,22 +191,9 @@
       <v-col class="d-flex justify-end">
         <v-btn
           @click="
+            carWheelsOptions = 0;
             wheelsFilter =
-              wheelsFilter === 'induction_wheels' ? '' : 'induction_wheels'
-          "
-          icon
-          variant="outlined"
-        >
-          <v-img
-            src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODELY/UI/induction_wheels.png?"
-          ></v-img>
-        </v-btn>
-      </v-col>
-      <v-col>
-        <v-btn
-          @click="
-            wheelsFilter =
-              wheelsFilter === 'gemini_wheels' ? '' : 'gemini_wheels'
+              wheelsFilter === 'gemini_wheels' ? '' : 'gemini_wheels';
           "
           icon
           variant="outlined"
@@ -217,13 +203,33 @@
           ></v-img>
         </v-btn>
       </v-col>
+      <v-col>
+        <v-btn
+          @click="
+            carWheelsOptions = 1;
+            wheelsFilter =
+              wheelsFilter === 'induction_wheels' ? '' : 'induction_wheels';
+          "
+          icon
+          variant="outlined"
+        >
+          <v-img
+            src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODELY/UI/induction_wheels.png?"
+          ></v-img>
+        </v-btn>
+      </v-col>
+
       <v-row class="d-flex justify-center mt-2 py-2">
-        <p>
+        <p v-if="carWheelsOptions === 0">
           <span class="text-body-1 text-black">19'' Gemini-fælge</span>
           <span class="text-body-1 text-grey-darken-1"> Inkluderet</span>
         </p>
+        <p v-else>
+          <span class="text-body-1 text-black">20'' Sports-fælge</span>
+          <span class="text-body-1 text-grey-darken-1"> 17.500 kr</span>
+        </p>
         <p class="text-body-1 text-grey-darken-1">
-          Est. rækkevidde som konfigureret: 455 km
+          Est. rækkevidde som konfigureret: {{ selectedCarOptions.range }} km
         </p>
         <p class="text-h6 text-black mt-3 pt-3">Vinterhjul</p>
       </v-row>
@@ -288,10 +294,11 @@
       <v-col class="d-flex justify-center">
         <v-btn
           @click="
+            carInteriorColor = 'black';
             colorIntFilter =
               colorIntFilter === 'Sort Premium-interiør'
                 ? ''
-                : 'Sort Premium-interiør'
+                : 'Sort Premium-interiør';
           "
           icon
           variant="outlined"
@@ -303,10 +310,11 @@
         </v-btn>
         <v-btn
           @click="
+            carInteriorColor = 'white';
             colorIntFilter =
               colorIntFilter === 'Hvid Premium-interiør'
                 ? ''
-                : 'Hvid Premium-interiør'
+                : 'Hvid Premium-interiør';
           "
           icon
           variant="outlined"
@@ -318,10 +326,19 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-row class="d-flex justify-center mt-2 py-2">
+    <v-row
+      v-if="carInteriorColor === 'black'"
+      class="d-flex justify-center mt-2 py-2"
+    >
       <p>
         <span class="text-body-1 text-black">Helt sort</span>
         <span class="text-body-1 text-grey-darken-1"> Inkluderet</span>
+      </p>
+    </v-row>
+    <v-row v-else class="d-flex justify-center mt-2 py-2">
+      <p>
+        <span class="text-body-1 text-black">Helt hvid</span>
+        <span class="text-body-1 text-grey-darken-1"> 7.500 kr</span>
       </p>
     </v-row>
     <v-row class="d-flex justify-center">
@@ -355,25 +372,69 @@
       </v-col>
     </v-row>
   </v-container>
+  <div v-if="false">
+    {{ selectedCarOptions }}
+    {{ setBaseCarOptions }}
+    {{ changeBaseCarOptions }}
+    {{ emitCarColor }}
+    {{ emitCarWheelsOption }}
+    {{ emitInterionColorOption }}
+  </div>
 </template>
 
 <script setup>
-import { defineProps, ref, computed } from "vue";
+import { watch } from "vue";
+import { defineProps, ref, computed, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
-
+const selectedTrimOption = ref(0);
 const wheelsSlide = ref(0);
+const longRangePrice = ref("");
+const performancePrice = ref("");
+const carColor = ref("white");
+const carWheelsOptions = ref(0);
+const { emit } = getCurrentInstance();
+const carInteriorColor = ref("black");
+
+watch(props, () => {
+  carColor.value = "white";
+  carWheelsOptions.value = 0;
+  carInteriorColor.value = "black";
+  wheelsSlide.value = 0;
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
+
 const props = defineProps({
   carModel: { type: String, required: true },
 });
+const emitCarColor = watch(carColor, function () {
+  emit("update:carColor", carColor.value);
+});
+
+const emitCarWheelsOption = watch(carWheelsOptions, function () {
+  emit("update:CarWheelsOption", carWheelsOptions.value);
+});
+const emitInterionColorOption = watch(carInteriorColor, function () {
+  emit("update:CarInteriorColor", carInteriorColor.value);
+});
+
 const carOptions = computed(() => {
   return store.getters["getOrderCarDataOptions"];
 });
 
-const selectedCarOptions = computed(() => {
-  if (carOptions.value.length > 0) {
-    return carOptions.value[0].data;
-  } else return carOptions;
+const selectedCarOptions = ref([]);
+
+const setBaseCarOptions = watch(carOptions, function () {
+  selectedCarOptions.value = carOptions.value[selectedTrimOption.value].data;
+  longRangePrice.value = carOptions.value[0].data.price;
+  performancePrice.value = carOptions.value[1].data.price;
+});
+
+const changeBaseCarOptions = watch(selectedTrimOption, function () {
+  selectedCarOptions.value = carOptions.value[selectedTrimOption.value].data;
 });
 </script>
 <style scoped>
