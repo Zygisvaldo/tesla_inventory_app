@@ -118,14 +118,9 @@ const carModel = computed(() => {
 </script>
 
 <style scoped>
-.main-side {
-  position: fixed;
-  height: 100vh;
-  width: calc(100% - 400px);
-}
-
 .sidebar-side {
   max-width: 400px;
+  min-width: 400px;
   overflow-y: auto;
   overflow-x: hidden;
 }

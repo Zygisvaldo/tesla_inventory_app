@@ -2,7 +2,7 @@
   <DialogView :openDialog="openDialog"></DialogView>
   <v-row>
     <v-col>
-      <HomeViewHeader style="height: 75px" />
+      <HomeViewHeader />
     </v-col>
   </v-row>
   <v-row>
@@ -10,7 +10,7 @@
       <SideBar />
     </v-col>
     <v-col>
-      <BaseCard />
+      <BaseCard/>
     </v-col>
   </v-row>
 </template>
