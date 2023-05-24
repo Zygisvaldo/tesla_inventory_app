@@ -1,8 +1,8 @@
 <template>
   <DialogView :openDialog="openDialog"></DialogView>
-  <v-row style="height: 100px">
+  <v-row>
     <v-col>
-      <HomeViewHeader />
+      <HomeViewHeader style="height: 75px" />
     </v-col>
   </v-row>
   <v-row>
