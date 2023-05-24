@@ -5,35 +5,39 @@
         <v-img class="px-3" :src="TeslaPreviewLogo" height="30"></v-img>
       </router-link>
     </template>
-    <router-link to="/orderCar/S" class="no-link-decoration">
-      <v-btn
-        variant="transparent"
-        class="ma-1 no-link-color"
-        color="gray-lighten-4"
+    <router-link
+      to="/orderCar/S"
+      class="ma-1 pa-1 no-link-decoration"
+      active-class="highlighted"
+    >
+      <v-btn variant="transparent" class="no-link-color" color="gray-lighten-4"
         >Model S</v-btn
       ></router-link
     >
-    <router-link to="/orderCar/3" class="no-link-decoration">
-      <v-btn
-        variant="transparent"
-        class="ma-1 no-link-color"
-        color="gray-lighten-4"
+    <router-link
+      to="/orderCar/3"
+      class="ma-1 pa-1 no-link-decoration"
+      active-class="highlighted"
+    >
+      <v-btn variant="transparent" class="no-link-color" color="gray-lighten-4"
         >Model 3</v-btn
       ></router-link
     >
-    <router-link to="/orderCar/Y" class="no-link-decoration">
-      <v-btn
-        variant="transparent"
-        class="ma-1 no-link-color"
-        color="gray-lighten-4"
+    <router-link
+      to="/orderCar/Y"
+      class="ma-1 pa-1 no-link-decoration"
+      active-class="highlighted"
+    >
+      <v-btn variant="transparent" class="no-link-color" color="gray-lighten-4"
         >Model Y</v-btn
       ></router-link
     >
-    <router-link to="/orderCar/X" class="no-link-decoration">
-      <v-btn
-        variant="transparent"
-        class="ma-1 no-link-color"
-        color="gray-lighten-4"
+    <router-link
+      to="/orderCar/X"
+      class="ma-1 pa-1 no-link-decoration"
+      active-class="highlighted"
+    >
+      <v-btn variant="transparent" class="no-link-color" color="gray-lighten-4"
         >Model X</v-btn
       >
     </router-link>
@@ -122,5 +126,11 @@ const drawer = ref(false);
 
 .no-link-decoration:visited {
   text-decoration: none;
+}
+.highlighted > .v-btn {
+  border: 2px solid #2962ff;
+  border-radius: 5px;
+  width: 100px;
+  box-sizing: border-box;
 }
 </style>

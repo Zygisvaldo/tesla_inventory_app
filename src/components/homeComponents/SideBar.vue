@@ -61,21 +61,25 @@
             v-model="driveUnitOptionsFilter"
             value="Model 3 Performance Dual Motor firehjulstræk"
             label="Performance firehjulstræk"
+            hide-details
           ></v-checkbox>
           <v-checkbox
             v-model="driveUnitOptionsFilter"
             value="Model 3 Long Range Dual Motor firehjulstræk"
             label="Long Range firehjulstræk"
+            hide-details
           ></v-checkbox>
           <v-checkbox
             v-model="driveUnitOptionsFilter"
             value="Model 3 Long Range med baghjulstræk"
             label="Long Range med baghjulstræk"
+            hide-details
           ></v-checkbox>
           <v-checkbox
             v-model="driveUnitOptionsFilter"
             value="Model 3 baghjulstræk"
             label="Model 3 baghjulstræk"
+            hide-details
           ></v-checkbox>
         </v-checkbox-group>
       </v-col>
@@ -91,9 +95,10 @@
                 : 'Pearl White lakering'
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: colorExtFilter === 'Pearl White lakering' }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/ExtWhite@3x.png"
           ></v-img>
         </v-btn>
@@ -104,9 +109,10 @@
               colorExtFilter === 'Solid Black lak' ? '' : 'Solid Black lak'
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: colorExtFilter === 'Solid Black lak' }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/ExtBlack@3x.png"
           ></v-img>
         </v-btn>
@@ -119,9 +125,12 @@
                 : 'Deep Blue Metallic lak'
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{
+              highlighted: colorExtFilter === 'Deep Blue Metallic lak',
+            }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/ExtBlue@3x.png"
           ></v-img>
         </v-btn>
@@ -134,9 +143,12 @@
                 : 'Red Multi-Coat lakering'
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{
+              highlighted: colorExtFilter === 'Red Multi-Coat lakering',
+            }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/ExtRed@3x.png"
           ></v-img>
         </v-btn>
@@ -149,9 +161,12 @@
                 : 'Midnight Silver Metallic lak'
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{
+              highlighted: colorExtFilter === 'Midnight Silver Metallic lak',
+            }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/ExtGrey@3x.png"
           ></v-img>
         </v-btn>
@@ -171,10 +186,13 @@
                 : 'Sort Premium-interiør'
           "
           icon
-          variant="outlined"
           class="mx-1"
         >
           <v-img
+            active-class="highlighted"
+            :class="{
+              highlighted: colorIntFilter === 'Sort Premium-interiør',
+            }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/IntBlack@3x.png"
           ></v-img>
         </v-btn>
@@ -186,10 +204,13 @@
                 : 'Hvid Premium-interiør'
           "
           icon
-          variant="outlined"
           class="mx-2"
         >
           <v-img
+            active-class="highlighted"
+            :class="{
+              highlighted: colorIntFilter === 'Hvid Premium-interiør',
+            }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/IntWhite@3x.png"
           ></v-img>
         </v-btn>
@@ -205,16 +226,19 @@
               v-model="wheelsOptionsFilter"
               value='18" Aero-fælge'
               label='18" fælge'
+              hide-details
             ></v-checkbox>
             <v-checkbox
               v-model="wheelsOptionsFilter"
               value='19" Sport-fælge'
               label='19" fælge'
+              hide-details
             ></v-checkbox>
             <v-checkbox
               v-model="wheelsOptionsFilter"
               value='20" Uberturbine-fælge'
               label='20" hjul'
+              hide-details
             ></v-checkbox>
           </v-checkbox-group>
         </v-col>
@@ -231,11 +255,13 @@
               v-model="autoPilotOptionsFilter"
               label="Autopilot"
               value="autopilot"
+              hide-details
             ></v-checkbox>
             <v-checkbox
               v-model="autoPilotOptionsFilter"
               label="Fuldt selvkørende"
               value="Fuldt selvkørende"
+              hide-details
             ></v-checkbox>
           </v-checkbox-group>
         </v-col>
@@ -252,16 +278,19 @@
               v-model="optionsFilter"
               label="Performance-opgradering"
               value="Performance-opgradering"
+              hide-details
             ></v-checkbox>
             <v-checkbox
               v-model="optionsFilter"
               value="Anhængertræk"
               label="Anhængertræk"
+              hide-details
             ></v-checkbox>
             <v-checkbox
               v-model="optionsFilter"
               value="Opvarmede bagsæder"
               label="Opvarmede bagsæder"
+              hide-details
             ></v-checkbox>
           </v-checkbox-group>
         </v-col>
@@ -348,3 +377,13 @@ onMounted(() => {
   console.log(filteredInventory.value);
 });
 </script>
+
+<style scoped>
+.highlighted {
+  border: 3px solid #2962ff;
+  border-radius: 25px;
+  width: 50px;
+  box-sizing: border-box;
+  padding: 1px;
+}
+</style>

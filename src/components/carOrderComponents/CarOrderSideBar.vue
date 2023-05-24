@@ -51,6 +51,7 @@
         <v-row>
           <v-col>
             <v-btn
+              :active="selectedTrimOption === 0 ? true : false"
               @click="selectedTrimOption = 0"
               variant="outlined"
               class="w-100 mb-2 d-flex justify-space-between"
@@ -63,6 +64,7 @@
               </v-row>
             </v-btn>
             <v-btn
+              :active="selectedTrimOption === 1 ? true : false"
               @click="selectedTrimOption = 1"
               variant="outlined"
               class="w-100 d-flex justify-space-between"
@@ -102,9 +104,10 @@
                 : 'Pearl White lakering';
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carColor === 'white' }"
             src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_White.png?"
           ></v-img>
         </v-btn>
@@ -116,9 +119,10 @@
               colorExtFilter === 'Solid Black lak' ? '' : 'Solid Black lak';
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carColor === 'black' }"
             src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Black.png?"
           ></v-img>
         </v-btn>
@@ -132,9 +136,10 @@
                 : 'Deep Blue Metallic lak';
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carColor === 'blue' }"
             src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Blue.png?"
           ></v-img>
         </v-btn>
@@ -148,9 +153,10 @@
                 : 'Red Multi-Coat lakering';
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carColor === 'red' }"
             src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Red.png?"
           ></v-img>
         </v-btn>
@@ -164,9 +170,10 @@
                 : 'Midnight Silver Metallic lak';
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carColor === 'gray' }"
             src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_MidnightSilver.png?"
           ></v-img>
         </v-btn>
@@ -196,9 +203,10 @@
               wheelsFilter === 'gemini_wheels' ? '' : 'gemini_wheels';
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carWheelsOptions === 0 }"
             src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODELY/UI/gemini_wheels.png?"
           ></v-img>
         </v-btn>
@@ -211,9 +219,10 @@
               wheelsFilter === 'induction_wheels' ? '' : 'induction_wheels';
           "
           icon
-          variant="outlined"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carWheelsOptions === 1 }"
             src="https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODELY/UI/induction_wheels.png?"
           ></v-img>
         </v-btn>
@@ -301,10 +310,11 @@
                 : 'Sort Premium-interiør';
           "
           icon
-          variant="outlined"
           class="mx-1"
         >
           <v-img
+            active-class="highlighted"
+            :class="{ highlighted: carInteriorColor === 'black' }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/IntBlack@3x.png"
           ></v-img>
         </v-btn>
@@ -317,10 +327,10 @@
                 : 'Hvid Premium-interiør';
           "
           icon
-          variant="outlined"
           class="mx-2"
         >
           <v-img
+            :class="{ highlighted: carInteriorColor === 'white' }"
             src="https://www.tesla.com/app-assets-inventory/inventory-search-tool/dist/assets/IntWhite@3x.png"
           ></v-img>
         </v-btn>
@@ -442,5 +452,12 @@ const changeBaseCarOptions = watch(selectedTrimOption, function () {
   max-width: 400px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.highlighted {
+  border: 3px solid #2962ff;
+  border-radius: 25px;
+  width: 50px;
+  box-sizing: border-box;
+  padding: 1px;
 }
 </style>
