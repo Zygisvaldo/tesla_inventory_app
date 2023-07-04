@@ -1,0 +1,33 @@
+<template>
+  <div class="text-center">
+    <v-btn color="primary">
+      Open Dialog
+      <v-dialog v-model="dialog" activator="parent" width="auto">
+        <v-card>
+          <v-card-text> </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" block @click="dialog = false"
+              >Close Dialog</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-btn>
+  </div>
+</template>
+<script>
+export default {
+  props: ["dialogOpen"],
+  data() {
+    return {
+      dialog: false,
+    };
+  },
+  watch: {
+    dialogOpen(newVal) {
+      this.dialog = newVal;
+      console.log("dialogOpen prop changed:", newVal);
+    },
+  },
+};
+</script>

@@ -9,12 +9,15 @@
         @update:carColor="handleCarColorUpdate"
         @update:CarWheelsOption="handleCarWheelsOptionUpdate"
         @update:CarInteriorColor="handleCarInteriorColorUpdate"
+        @update:carFuntionsPopUp="handlecarFuntionsPopUp"
       />
+      <CarBasePopUpVue :dialogOpen="dialogOpen" />
     </v-col>
   </v-row>
 </template>
 
 <script setup>
+import CarBasePopUpVue from "@/components/carOrderComponents/CarBasePopUp.vue";
 import CarOrderMain from "../components/carOrderComponents/CarOrderMain.vue";
 import CarOrderSideBar from "../components/carOrderComponents/CarOrderSideBar.vue";
 import { watch, defineProps, computed, onBeforeMount, ref } from "vue";
@@ -25,6 +28,12 @@ const color = ref("white");
 const wheelsOptionInit = ref(0);
 const interiorColorSelected = ref("black");
 const pathToFireBase = ref("carColorOptions");
+const dialogOpen = ref(false);
+
+function handlecarFuntionsPopUp(openDialogFromSideBar) {
+  console.log(openDialogFromSideBar);
+  dialogOpen.value = openDialogFromSideBar;
+}
 
 function handleCarInteriorColorUpdate(interiorColor) {
   interiorColorSelected.value = interiorColor;

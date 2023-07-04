@@ -10,7 +10,7 @@
       <a
         class="footer__link twitter-link"
         target="_blank"
-        href="https://linkedin.com/in/zigy-vaitkunas-51923088"
+        href="https://linkedin.com/in/zigy-vaitkunas-51923088/"
         >Žygimantas Vaitkūnas</a
       >. Used for learning and portfolio.
     </p>

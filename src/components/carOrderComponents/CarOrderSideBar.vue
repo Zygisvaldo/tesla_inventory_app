@@ -83,6 +83,7 @@
     <v-row>
       <v-col class="d-flex justify-center">
         <v-btn
+          @click="carFuntionsPopUp"
           variant="tonal"
           class="text-body-2 mt-10"
           color="grey"
@@ -389,6 +390,7 @@
     {{ emitCarColor }}
     {{ emitCarWheelsOption }}
     {{ emitInterionColorOption }}
+    {{ carFuntionsPopUpOpen }}
   </div>
 </template>
 
@@ -405,6 +407,7 @@ const carColor = ref("white");
 const carWheelsOptions = ref(0);
 const { emit } = getCurrentInstance();
 const carInteriorColor = ref("black");
+const carFuntionsPopUpOpen = ref(false);
 
 watch(props, () => {
   carColor.value = "white";
@@ -430,6 +433,14 @@ const emitCarWheelsOption = watch(carWheelsOptions, function () {
 const emitInterionColorOption = watch(carInteriorColor, function () {
   emit("update:CarInteriorColor", carInteriorColor.value);
 });
+function carFuntionsPopUp() {
+  console.log(carFuntionsPopUpOpen.value);
+  carFuntionsPopUpOpen.value = true;
+  console.log(carFuntionsPopUpOpen.value);
+  emit("update:carFuntionsPopUp", carFuntionsPopUpOpen.value);
+  carFuntionsPopUpOpen.value = false;
+  console.log(carFuntionsPopUpOpen.value);
+}
 
 const carOptions = computed(() => {
   return store.getters["getOrderCarDataOptions"];
